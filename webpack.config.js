@@ -19,12 +19,43 @@ module.exports = {
    },
 
    plugins: [
+       
+
        new HtmlWebpackPlugin({
-           template: './src/index.html',
-           inject: true,
-           chunks: ['index'],
-           filename: 'index.html'
-       }),
+        template: './src/About.html',
+        inject: true,
+        chunks: ['About'],
+        filename: 'About.html'
+    }),
+
+    new HtmlWebpackPlugin({
+        template: './src/enter_task.html',
+        inject: true,
+        chunks: ['enter_task'],
+        filename: 'enter_task.html'
+    }),
+
+    new HtmlWebpackPlugin({
+        template: './src/f1.html',
+        inject: true,
+        chunks: ['f1'],
+        filename: 'f1.html'
+    }),
+
+    new HtmlWebpackPlugin({
+        template: './src/Main.html',
+        inject: true,
+        chunks: ['Main'],
+        filename: 'Main.html'
+    }),
+
+    new HtmlWebpackPlugin({
+        template: './src/Projects.html',
+        inject: true,
+        chunks: ['Projects'],
+        filename: 'Projects.html'
+    }),
+ 
    ],
 
    devServer: {
