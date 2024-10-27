@@ -1,0 +1,580 @@
+body{
+height: 100vh;
+background: rgb(79,50,115);
+background: linear-gradient(0deg, rgba(79,50,115,1) 0%, rgba(18, 0, 22, 0.951) 29%) no-repeat;
+color: white;
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    font-weight: normal;
+}
+
+
+
+
+
+
+.logo{
+position: static;
+    border-radius: 50% 50%;
+    margin-top: 5%;
+    margin-left: 5%;
+  top: 10%;
+  left: 5%;
+}
+.zagl404{
+    background-color: #000000;
+   background-image:  url("./Monster 404 Error-pana.svg");
+   background-position: center center;
+}
+.bodymain{
+    background-color: #000000;
+   background-image:  url("./rice field-bro.svg");
+   background-position: bottom left;
+   top: 5%;
+}
+.shapka{
+    width: 100%;
+    
+    
+    /*
+    max-height: 100%;
+    min-height: 100vh;
+    background-color: darkslateblue;*/
+    
+    position: sticky;
+    top: 1px;
+    display: flex;
+    
+}
+.header{
+    width: auto;
+    height: auto;
+    margin-bottom: 0px;
+    overflow-wrap: break-word;
+    
+    
+    padding: 10px;
+    padding-top: 0px;
+    border: 1px solid hsla(0, 0%, 0%, 0.0);
+    border-radius: 5px;
+    /*border-top-left-radius:inherit ;
+    border-top-right-radius:inherit ;
+    border-start-start-radius: inherit ;
+     display: flexbox;
+     
+     */
+    
+   
+}
+h1.header{
+    font-size: 24pt;
+    font-weight: normal;
+}
+.main_info{
+    
+    background-color: rgb(73, 0, 122);
+    border: 1px solid hsla(0, 0%, 0%, 0.0);
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 10%;
+    width: 50%;
+    margin-top: 0%;
+    padding: 0px 5px;
+    font-size: 16pt;
+    /*background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 32%, rgba(255,0,52,1) 100%);*/
+}
+.tasks_table th{
+    font-weight: normal;
+}
+.trans{
+    text-align:center;
+    
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    font-size: 16pt;
+    margin: 0px 5px;
+    padding: 5px;
+    flex-grow: 2;
+   border: #00000000;
+   border-radius: 5px;
+   color: rgb(162, 1, 255);
+    
+    background: rgb(21, 0, 41);
+    background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(153, 0, 255, 0.29) 40%);
+}
+.transtek{
+    background-color:  rgb(50, 43, 97);
+    color: rgb(211, 134, 255);
+    
+
+}
+.trans.transtek:hover{
+    cursor: default;
+}
+.trans:hover{
+    background-color:  rgb(128, 103, 138);
+    color: rgb(211, 134, 255);
+    cursor: pointer;
+}
+.transtek:hover{
+    background-color:  rgb(50, 43, 97);
+    
+    
+}
+h1 {
+color: #ffffff;
+font-size: 24pt;
+text-align: center;
+padding: 10px;
+font-weight: normal;
+}
+h2{
+    color: #ffffff;
+font-size: 24pt;
+text-align: center;
+font-weight: normal;
+padding: 10px;
+}
+.k1{
+list-style-type: square;
+/*display: none;*/
+
+}
+
+div.table{ 
+    display: flexbox;
+    background-color: darkslateblue;
+    color: #ffffff;  
+    width: fit-content;
+    margin: auto; 
+    border-width: 5px;
+    border-color: #000000;
+  
+}
+div.hsite{
+    width: 100%;
+    background-color: darkslateblue;
+}
+form.enter_from {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    background-color: rgba(169, 169, 169, 0);
+    display: inline;
+    overflow: hidden;
+    height: max-content;
+    
+}
+
+button{
+    
+    color: #ffffff;
+    
+}
+.darkenBg {
+    z-index: 2;
+    top: 0px;
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.616);
+    
+    }
+.hid{
+    visibility: hidden;
+}
+.vis{
+    visibility: visible;
+}
+dialog{
+    z-index: 3;
+    color: #ffffff;
+    border-radius: 5px;
+    border-color: rgba(153, 0, 255, 0.4);
+    background: rgb(79,50,115);
+background: linear-gradient(0deg, rgba(79,50,115,1) 0%, rgba(18, 0, 22, 0.951) 29%) no-repeat;
+position: fixed;
+top: 30vh;
+left: 0vh;
+}
+
+.m1{
+    z-index: 3;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    background-color: rgba(169, 169, 169, 0);
+    
+}
+button.input_bnt{
+    height: 100%;
+    background: rgb(21, 0, 41);
+    background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(153, 0, 255, 0.29) 40%);
+    border-width: 3px;
+    padding: 5px;
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    font-size: 14pt;
+    border-radius: 5px;
+    border-color: rgba(153, 0, 255, 0.4);
+    
+}
+input.input_form{
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgba(153, 0, 255, 0.4);
+    padding: 5px;
+    font-size: 14pt;
+    border-radius: 5px;
+}
+table.tasks_table{
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgba(153, 0, 255, 0.4);
+    margin-top: 1cm;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    
+    background: rgb(21, 0, 41);
+    background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(49, 0, 82, 0.63) 40%);
+    color: #ffffff;
+    
+    overflow: hidden;
+    overflow-wrap:break-word;
+}
+button.del{
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    margin-left: 5px;
+    color: #ffffff; 
+    background-color: #000000;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgba(153, 0, 255, 0.4);
+}
+input:checked {
+    border: none;
+    outline: 2px solid #ffffff;
+    
+  }
+
+button:hover,input:hover{
+    background-color: rgb(105, 86, 227);
+    cursor: pointer;
+}
+input:hover{
+    cursor: inherit;
+}
+  
+.cb{
+    width: auto;
+    height: auto;
+}
+div.shpkatel{
+    display: none;
+    
+}
+
+
+@media (max-device-width: 768px) {
+    div.shapka{
+        display: none;
+    }
+
+    div.shpkatelbtn.shpkatel{
+        width: 100%;
+        align-content: center;
+        background-color: #000000;
+        animation: none;
+        z-index: 3;
+        
+        visibility: visible;
+        top: 3vw;
+        right: 3vw;
+        width: 10vw;
+        
+        height: 10vw;
+        display: inline;
+
+      
+        
+    }
+    #Burger.trans.closed{
+        
+        background:#00000000 url('./closedmenu.svg') no-repeat ;
+        background-position: center top;
+        margin: 0%;
+        padding: 0%;
+        width: 10vw;
+        height: 10vw;
+    }
+    #Burger.trans.openned{
+        
+        background:#00000000 url('./openedmenu.svg') no-repeat ;
+        background-position: center top;
+        margin: 0%;
+        padding: 0%;
+        width: 10vw;
+        height: 10vw;
+    }
+    div.shpkatel{
+
+        z-index: 3;
+        visibility: hidden;
+        font-size: 2vw;
+        
+        position: fixed;
+        top: 13vw;
+        right: 1px;
+        margin-right: 1px;
+        width: max-content;
+        height: 13vw;
+        display: flex;
+        flex-flow: column;
+    }
+    dialog{
+        z-index: 3;
+        width: 75vw;
+        height: auto;
+        top: 25vh;
+    }
+    
+    .trans{
+        
+        height: max-content;
+        width: 30vw;
+        min-height: 15vw;
+        max-height: 20vw;
+        margin: 5px;
+        font-size: 5vw;  
+        background: rgb(21, 0, 41);
+        background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(59, 7, 94, 0.993) 40%);
+        
+        overflow-wrap: break-word;
+        
+    }
+    h1 {
+        font-size: 8vw;
+    }
+    h2 {
+        font-size: 6vw;
+    }
+    h1.header {
+        font-size: 8vw;
+    }
+
+    button.input_bnt{
+        height: 15vw;
+        overflow: hidden;
+        max-width: 80%;
+        font-size: 6vw;
+        padding: 10px;
+    }
+    input.input_form {
+        max-width: 80%;
+        font-size: 6vw;
+        padding: 10px; 
+        cursor: text;
+    }
+    div.main_info {
+        
+        margin-top: 10px;
+        width: 80%;
+        font-size: 4vw;
+        padding: 10px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+    table.tasks_table{
+        font-size: 4vw;
+        padding: 1vw; 
+    }
+    button.del {
+        font-size: 4vw;
+        padding: 2vw;  
+    }
+    .cb{
+        width: 7vw;
+        height: 7vw;
+    }
+
+
+}
+
+
+
+
+
+@media (max-device-width: 360px) {
+    .m1{
+        margin: auto;
+    }
+    div.shapka{
+        display: none;
+        border-width: 0;
+         border-style: none;
+          border-color: transparent;
+          width: 100%;
+    }
+
+    div.shpkatelbtn.shpkatel{
+        
+
+        z-index: 3;
+        background-color: #000000;
+        align-items: center;
+         justify-content: center;
+        position: sticky;
+        visibility: visible;
+        top: 0vw;
+        width: 100%;
+        
+        height: 13vw;
+        
+        margin: auto;
+        
+        display: flex;
+        right: auto;
+        left: auto;
+        
+        padding: 1vw;
+        
+ 
+        
+        
+    }
+    #Burger.trans.closed{
+        background:#00000000 url('./closedmenu.svg') no-repeat ;
+        background-position: center center;
+        margin: 0%;
+        padding: 0%;
+        width: 100%;
+        height: 13vw;
+        
+       
+    }
+    #Burger.trans.openned{
+        background:#00000000 url('./openedmenu.svg') no-repeat ;
+        background-position: center center;
+        margin: 0%;
+        padding: 0%;
+        width: 100%;
+        height: 13vw;
+        
+    }
+    div.shpkatel{
+        z-index: 3;
+        visibility: hidden;
+        font-size: 2vw;
+        height: 13vw;
+        position: fixed;
+        top: 15vw;
+        left: 2vw;
+        margin: auto;
+        
+        width: 90%;
+        
+        display: flex;
+        flex-flow: column;
+    }
+    dialog{
+        z-index: 3;
+        width: 75vw;
+        top: 30vh;
+    }
+    
+    .trans{
+        z-index: 3;
+        height: max-content;
+        width: 100%;
+        min-height: 15vw;
+        max-height: 20vw;
+        margin: 5px;
+        font-size: 6vw;  
+        background: rgb(21, 0, 41);
+        background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(59, 7, 94, 0.993) 40%);
+        border-radius: 3vw;
+        border-width: 2px;
+        overflow-wrap: break-word;
+        
+    }
+    h1 {
+        font-size: 8vw;
+    }
+    h2 {
+        font-size: 6vw;
+    }
+    h1.header {
+        font-size: 8vw;
+    }
+
+    button.input_bnt{
+        height: 15vw;
+        overflow: hidden;
+        max-width: 80%;
+        font-size: 6vw;
+        padding: 10px;
+    }
+    input.input_form {
+        max-width: 80%;
+        font-size: 6vw;
+        padding: 10px; 
+        
+    }
+    div.main_info {
+        
+        margin-top: 10px;
+        width: 80%;
+        font-size: 4vw;
+        padding: 10px; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+    table.tasks_table{
+        font-size: 4vw;
+        padding: 1vw; 
+    }
+    button.del {
+        font-size: 4vw;
+        padding: 2vw;  
+    }
+    .cb{
+        width: 7vw;
+        height: 7vw;
+    }
+    .logo{
+        width: 20vw;
+        height: 20vw;
+        margin-left: 40%;
+
+    }
+
+    
+}
+
+@keyframes NavPhones {
+    0%  {visibility: hidden;
+        transform: translateY(100vh);
+         filter: brightness(0%); }
+
+    100% {visibility: visible; 
+        transform: translateY(0vh);
+        filter: brightness(100%); }
+}
+.animated{
+    animation-name: NavPhones;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+
+}

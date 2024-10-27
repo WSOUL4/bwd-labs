@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>О приложении</title>
+    <link rel="stylesheet" href="styles1.css">
+    <script src="./shapka.js"></script>
+    <link rel="icon" type="image/png" href="./favicon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="shortcut icon" href="./favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+<link rel="manifest" href="./site.webmanifest" />
+</head>
+<body>
+  <script src="bundle.js"></script> 
+  <div class="shpkatelbtn shpkatel" >
+    <button class="trans closed" id="Burger" onclick="OpenNavigation()"></button>
+  </div>
+  <div class="shpkatel" id="BurgerMenu" style="visibility: hidden;">
+    <button class="trans" id="Main" onclick="OpenMain()">Главная</button>
+    <button class="trans" id="TaskTable" onclick="OpenTaskTable()">Таблица задач</button>
+    <button class="trans" id="Projects" onclick="OpenProjects()">Проекты</button>
+    <button class="trans transtek" id="About" onclick="OpenAbout()" disabled="true">О программе</button>
+  </div>
+
+
+  <div class="shapka">
+    <button class="trans" id="Main" onclick="OpenMain()">Главная</button>
+    <button class="trans" id="TaskTable" onclick="OpenTaskTable()">Таблица задач</button>
+    <button class="trans" id="Projects" onclick="OpenProjects()">Проекты</button>
+    <button class="trans transtek" id="About" onclick="OpenAbout()" disabled="true">О программе</button>
+  </div>
+
+
+<div class="darkenBg hid" id="darkenBg" ></div>
+      <div class="hsite"><H1>О программе</H1></div>
+</body>
+</html>

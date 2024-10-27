@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Список задач</title>
+    <link rel="stylesheet" href="styles1.css">
+    <script src="./shapka.js"></script>
+    <link rel="icon" type="image/png" href="./favicon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+<link rel="shortcut icon" href="./favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+<link rel="manifest" href="./site.webmanifest" />
+    </head>
+
+<body>
+  <script src="bundle.js"></script> 
+  <div class="shpkatelbtn shpkatel" >
+    <button class="trans closed" id="Burger" onclick="OpenNavigation()"></button>
+  </div>
+  <div class="shpkatel" id="BurgerMenu" style="visibility: hidden;">
+    <button class="trans" id="Main" onclick="OpenMain()">Главная</button>
+    <button class="trans transtek" id="TaskTable" onclick="OpenTaskTable()" disabled="true">Таблица задач</button>
+    <button class="trans" id="Projects" onclick="OpenProjects()">Проекты</button>
+    <button class="trans" id="About" onclick="OpenAbout()">О программе</button>
+  </div>
+
+
+  <div class="shapka">
+    <button class="trans" id="Main" onclick="OpenMain()">Главная</button>
+    <button class="trans transtek" id="TaskTable" onclick="OpenTaskTable()" disabled="true">Таблица задач</button>
+    <button class="trans" id="Projects" onclick="OpenProjects()">Проекты</button>
+    <button class="trans" id="About" onclick="OpenAbout()">О программе</button>
+  </div>
+
+
+<div class="darkenBg hid" id="darkenBg" ></div>
+
+
+
+
+    <div class="hsite"><H1>Список задач</H1></div>
+    
+
+
+
+
+
+    <div class="m1">
+
+      <dialog id="DialogTask">
+        <h1 id="DialogH1">
+          Вводим задачу
+        </h1>
+        <form class="enter_from" id="DialogForm">
+          <p><input type="text" size="40" class="input_form" id="DialogInput">
+              
+              <button type="submit" class="input_bnt" id="DialogInputBtn">Добавить</button></p>
+              <button type="button" class="input_bnt">Закрыть диалоговое окно</button>
+         </form>
+        
+      </dialog>
+
+      <button class="input_bnt" id="enter_task" onclick="OpenTaskDialog()" >Ввести текст задачи</button>
+    
+        
+    </div>
+
+       <div class="hsite"><H2>Задачи</H2></div>
+       <div class="table">
+       
+
+          <table border="1" class="tasks_table" id="task_table" align="center">
+            <tr>
+             <th>Задача</th>
+             <th>В работе</th>
+             <th>Выполнена</th>
+            </tr>
+            <tr>
+             <td>Задача 1   <button type="reset" class="del">Удалить задачу</button></td>
+             <td><input type="checkbox" name="В работе" class="cb"></td>
+            <td><input type="checkbox" name="Выполнена" class="cb"></td>
+
+           </tr>
+           <tr>
+            <td>Задача 2    <button type="reset" class="del">Удалить задачу</button></td>
+            <td><input type="checkbox" name="В работе" class="cb"></td>
+            <td><input type="checkbox" name="Выполнена" class="cb"></td>
+           </tr>
+          </table>
+
+
+
+        </div>
+       </div>
+
+
+    
+</body>
+</html>
