@@ -54,8 +54,12 @@
           Вводим задачу
         </h1>
         <form class="enter_from" id="DialogForm">
-          <p><input type="text" size="40" class="input_form" id="DialogInput"></p>
-          <p></p>
+          <p id="DialogH2">Задача</p>
+          <input type="text" size="40" class="input_form" id="DialogInput">
+          <p id="DialogH3">Приоритет</p>
+          <input type="number" size="40" class="input_form" id="DialogPriority">
+          <br>
+          <br>
               <button type="submit" class="input_bnt" id="DialogInputBtn" onclick="AddTask(this)">Добавить</button></p>
               <button type="button" class="input_bnt">Закрыть диалоговое окно</button>
          </form>
@@ -63,7 +67,7 @@
       </dialog>
 
       <button class="input_bnt" id="enter_task" onclick="OpenTaskDialog()" >Ввести текст задачи</button>
-    
+      <button class="input_bnt" id="sort_table" onclick="sortTable(3)" >Сортировать таблицу</button>
         
     </div>
 
@@ -76,6 +80,7 @@
              <th>Задача</th>
              <th>В работе</th>
              <th>Выполнена</th>
+             <th>Приоритет</th>
             </tr>
 
           </table>
@@ -87,19 +92,29 @@
 
 
     <script>
+      //clearLocalTable();
       document.getElementById('DialogForm').addEventListener('submit', function(event) {
         //console.log('Форма отправляется');
         event.preventDefault(); // предотвратить стандартное поведение формы (перезагрузку страницы)
         });
 
-        var Table1 = JSON.parse(localStorage.getItem("Table"));
-        //console.log(Table1);
-        //clearLocalTable();
-        if ((Table1==="")|| (Table1===null)){
-           
-          }else{
+
             let table= document.getElementById("task_table");
-            table.innerHTML=Table1;
+            const savedData = localStorage.getItem('Table');
+            const tableData = JSON.parse(savedData);
+            if ((tableData==="")|| (tableData===null)){
+           
+            }else{
+            // Для восстановления данных в таблицу
+            tableData.forEach(row => {
+            const tr = document.createElement('tr');
+            row.forEach(cell => {
+            const td = document.createElement('td');
+            td.innerHTML = cell;
+            tr.appendChild(td);
+            });
+            table.appendChild(tr);
+            });
           }
     </script>
 </body>
