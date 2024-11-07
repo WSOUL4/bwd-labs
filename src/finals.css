@@ -1,0 +1,208 @@
+div.header{
+    width: auto;
+    margin-bottom: 0px;
+    
+    overflow-wrap: break-word;
+    background-color: rgb(205, 50, 78);
+    color: white;
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    padding: 15px;
+    font-size: 20pt;
+    border-top-left-radius:inherit ;
+    border-top-right-radius:inherit ;
+    border-start-start-radius: inherit ;
+}
+div.ta{
+    width: 600px;
+    border: 1px solid hsla(0, 0%, 0%, 0.0);
+    border-radius: 5px;
+    display: flexbox;
+}
+div.hstack1{
+    width: 600px;
+    border: 1px solid hsla(0, 0%, 0%, 0.0);
+    border-radius: 5px;
+    display: flex;
+    flex-flow: row;
+    height: auto;
+    background-color: rgb(0, 153, 255);
+    color: white;
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    text-align: center;
+    justify-content: center;
+    
+}
+div.hshstack2{background-color: rgb(205, 50, 78);}
+div.hshstack3{background-color: rgb(255, 157, 0);}
+div.hshstack4{background-color: rgb(188, 73, 255);}
+div.hshstack5{background-color: rgb(255, 73, 158);}
+div.vstack1{
+    text-align: center;
+    justify-content: center;
+    width: max-content;
+    display: flex;
+    flex-flow: column;
+    padding: 15px;
+    padding-inline-end: 30px;
+    
+    background-color: rgba(0, 0, 0, 0.2);
+}
+div.vstacktill{
+padding: 0px;
+padding-inline-end: 0px;
+flex-grow: 2;
+}
+div.indexstack{
+    margin-right: 5px;
+    font-size: 40pt;
+
+}
+
+table.t2{
+    margin: 0px;
+   
+    width: 100%;
+    
+    /*border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    border-end-end-radius: inherit;*/
+    border-radius: inherit;
+    padding: 0px;
+    overflow:hidden;/* без этого за бордер радиус лезет краска */
+    
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+    
+}
+tbody.t2{
+    margin: auto;
+    
+}
+tbody.t2 td{
+    
+    padding-bottom: auto;
+}
+
+tbody.t2 tr{
+    background-color: rgba(0, 0, 0, 0.4);}
+tbody.t2 td:first-child{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+    
+}
+
+tbody.t2 td:last-child{
+    
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+}
+
+tbody.t2 tr:first-child{
+    border-spacing: 0px 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-collapse: collapse;
+    border-spacing: 0px 0px;
+}
+tbody.t2 tr:last-child{
+    border-collapse: collapse;
+    border-spacing: 0px 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+table.t1{
+    margin-top: 0px;
+   
+    width: 100%;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    border-end-end-radius: inherit;
+    padding: 0px;
+    overflow:hidden;/* без этого за бордер радиус лезет краска */
+    border-spacing: 0px;
+    
+}
+tbody.t1{
+    margin: auto;
+    
+}
+tbody.t1 td{
+    padding: 10px;
+}
+/* Нечетные строки */
+tbody.t1 tr:nth-child(odd){
+    color: rgb(0, 208, 255);
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    font-size: 16pt;
+    background: rgb(0,23,37);
+    background: linear-gradient(90deg, rgba(0,23,37,1) 0%, rgba(0,102,170,0.2903536414565826) 40%);
+}
+ 
+/* Четные строки */
+tbody.t1 tr:nth-child(even){
+    color: rgb(255, 157, 0);
+    font-family: fantasy;
+    font-style: italic;
+    font-stretch: condensed;
+    font-size: 16pt;
+    background: rgb(41,21,0);
+    background: linear-gradient(90deg, rgba(41,21,0,1) 0%, rgba(255,134,0,0.2903536414565826) 40%);
+
+
+}
+
+tbody.t1_2 tr:nth-child(odd){
+    color: rgb(0, 208, 255);
+    
+    background: rgb(0,23,37);
+    background: linear-gradient(90deg, rgba(0,23,37,1) 0%, rgba(0,102,170,0.2903536414565826) 40%);
+}
+ 
+/* Четные строки */
+tbody.t1_2 tr:nth-child(even){
+    color: rgb(188, 73, 255);
+    
+    background: rgb(21, 0, 41);
+    background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(153, 0, 255, 0.29) 40%);
+
+
+}
+tbody.t1_3 tr:nth-child(odd){
+    color: rgb(0, 208, 255);
+    
+    background: rgb(0,23,37);
+    background: linear-gradient(90deg, rgba(0,23,37,1) 0%, rgba(0,102,170,0.2903536414565826) 40%);
+}
+ 
+/* Четные строки */
+tbody.t1_3 tr:nth-child(even){
+    color: rgb(255, 73, 158);
+    
+    background: rgb(41, 0, 32);
+    background: linear-gradient(90deg, rgb(41, 0, 29) 0%, rgba(255, 0, 200, 0.29) 40%);
+
+
+}
+tbody.t1_4 tr:nth-child(odd){
+    color: rgb(255, 73, 158);
+    
+    background: rgb(41, 0, 32);
+    background: linear-gradient(90deg, rgb(41, 0, 29) 0%, rgba(255, 0, 200, 0.29) 40%);
+}
+ 
+/* Четные строки */
+tbody.t1_4 tr:nth-child(even){
+    color: rgb(188, 73, 255);
+    
+    background: rgb(21, 0, 41);
+    background: linear-gradient(90deg, rgb(28, 0, 41) 0%, rgba(153, 0, 255, 0.29) 40%);
+
+
+}

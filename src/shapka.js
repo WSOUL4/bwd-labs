@@ -19,8 +19,7 @@ function OpenNavigation(){
   // bg.className='darkenBg vis';
     menu.className='shpkatel animated';
     menu.style.visibility='visible';
-    bg.style.visibility='visible';
-    bg.style.display='block';
+    show(bg);
     menubtn.className='trans openned';
     //bg.className='darkenBg vis';
     
@@ -29,8 +28,7 @@ function OpenNavigation(){
         
             if(menubtn.classList.contains('openned')){
                 //document.getElementById('darkenBg').className='darkenBg hid'; 
-                bg.style.visibility='hidden';   
-                bg.style.display='none';
+                hide(bg);
 
                 menu.style.visibility='hidden'; 
                 menu.className='shpkatel';
@@ -40,8 +38,7 @@ function OpenNavigation(){
             }
                 else if(menubtn.classList.contains('closed')){
                     menu.style.visibility='visible';
-                    bg.style.visibility='visible';
-                    bg.style.display='block';
+                    show(bg);
                     menubtn.className='trans openned';
                     menu.className='shpkatel animated';
                     
@@ -55,8 +52,7 @@ function OpenNavigation(){
                 menu.style.visibility='hidden';
                 menu.className='shpkatel';
                 //bg.className='darkenBg hid'; 
-                bg.style.visibility='hidden';
-                bg.style.display='none';
+                hide(bg);
                 menubtn.className='trans closed';
         }
         }
@@ -94,8 +90,7 @@ function OpenTaskDialog(){
     window.addEventListener('click', (event) => {
         if (!['DialogTask', 'enter_task','DialogH1','DialogForm','DialogInput','DialogInputBtn','Burger'].includes(event.target.id)) {
            // menubtn.style.zIndex='3';
-            bg.style.visibility='hidden';
-            bg.style.display='none';
+            hide(bg);
             dialog.close();
             
         }

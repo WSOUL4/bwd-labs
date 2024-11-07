@@ -5,15 +5,17 @@
     <title>Список задач</title>
     <link rel="stylesheet" href="styles1.css">
     <script src="./shapka.js"></script>
+    <script src="./taskTabke.js"></script>
+    <script src="./elem_displays.js"></script>
     <link rel="icon" type="image/png" href="./favicon-48x48.png" sizes="48x48" />
 <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 <link rel="shortcut icon" href="./favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
 <link rel="manifest" href="./site.webmanifest" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
 
 <body>
-  <script src="bundle.js"></script> 
   <div class="shpkatelbtn shpkatel" >
     <button class="trans closed" id="Burger" onclick="OpenNavigation()"></button>
   </div>
@@ -33,7 +35,7 @@
   </div>
 
 
-<div class="darkenBg hid" id="darkenBg" ></div>
+<div class="darkenBg hid" id="darkenBg" style="visibility: hidden;"></div>
 
 
 
@@ -52,9 +54,9 @@
           Вводим задачу
         </h1>
         <form class="enter_from" id="DialogForm">
-          <p><input type="text" size="40" class="input_form" id="DialogInput">
-              
-              <button type="submit" class="input_bnt" id="DialogInputBtn">Добавить</button></p>
+          <p><input type="text" size="40" class="input_form" id="DialogInput"></p>
+          <p></p>
+              <button type="submit" class="input_bnt" id="DialogInputBtn" onclick="AddTask(this)">Добавить</button></p>
               <button type="button" class="input_bnt">Закрыть диалоговое окно</button>
          </form>
         
@@ -75,17 +77,7 @@
              <th>В работе</th>
              <th>Выполнена</th>
             </tr>
-            <tr>
-             <td>Задача 1   <button type="reset" class="del">Удалить задачу</button></td>
-             <td><input type="checkbox" name="В работе" class="cb"></td>
-            <td><input type="checkbox" name="Выполнена" class="cb"></td>
 
-           </tr>
-           <tr>
-            <td>Задача 2    <button type="reset" class="del">Удалить задачу</button></td>
-            <td><input type="checkbox" name="В работе" class="cb"></td>
-            <td><input type="checkbox" name="Выполнена" class="cb"></td>
-           </tr>
           </table>
 
 
@@ -94,6 +86,21 @@
        </div>
 
 
-    
+    <script>
+      document.getElementById('DialogForm').addEventListener('submit', function(event) {
+        //console.log('Форма отправляется');
+        event.preventDefault(); // предотвратить стандартное поведение формы (перезагрузку страницы)
+        });
+
+        var Table1 = JSON.parse(localStorage.getItem("Table"));
+        //console.log(Table1);
+        //clearLocalTable();
+        if ((Table1==="")|| (Table1===null)){
+           
+          }else{
+            let table= document.getElementById("task_table");
+            table.innerHTML=Table1;
+          }
+    </script>
 </body>
 </html>
