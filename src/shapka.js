@@ -88,7 +88,7 @@ function OpenTaskDialog(){
     bg.style.visibility='visible';
     bg.style.display='block';
     window.addEventListener('click', (event) => {
-        if (!['DialogTask', 'enter_task','DialogH1','DialogForm','DialogInput','DialogInputBtn','Burger'].includes(event.target.id)) {
+        if (!['DialogTask', 'enter_task','DialogH1','DialogForm','DialogInput','DialogInputBtn','Burger','DialogInputBtn','DialogPriority','DialogH2','DialogH3'].includes(event.target.id)) {
            // menubtn.style.zIndex='3';
             hide(bg);
             dialog.close();

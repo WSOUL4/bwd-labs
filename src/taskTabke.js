@@ -2,11 +2,34 @@
 
 */
 $('#DialogInputBtn').click(AddTask);
+$('#sort_table').click(sortTable);
+function sortTable(columnIndex) {//asc
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("task_table");
+  switching = true;
+  while (switching) {
+  switching = false;
+  rows = table.rows;
+  for (i = 1; i < (rows.length - 1); i++) {
+  shouldSwitch = false;
+  x = rows[i].getElementsByTagName("td")[columnIndex];
+  y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+  if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {//to ch
+  shouldSwitch = true;
+  break;
+  }
+  }
+  if (shouldSwitch) {
+  rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+  switching = true;
+  }
+  }
+  }
 function AddTask(){
     //var par=$(el).parent().attr('id');
     //var children = par.querySelectorAll('#DialogInput');
     let text=document.getElementById("DialogInput").value;
-
+    let priority= document.getElementById("DialogPriority").value;
     //console.log(text);
     let table= document.getElementById("task_table");
 
@@ -14,7 +37,8 @@ function AddTask(){
     Text_td = document.createElement('td');
     Mark1_td = document.createElement('td');
     Mark2_td = document.createElement('td');
-
+    prior_td = document.createElement('td');
+    prior_td.innerHTML=priority;
     Text_td.innerHTML=text;
 
     Text_td.innerHTML=Text_td.innerHTML+`<button class="del" onclick="DeleteTask(this)">Удалить задачу</button>`;
@@ -32,6 +56,7 @@ function AddTask(){
     row.appendChild(Text_td);
     row.appendChild(Mark1_td);
     row.appendChild(Mark2_td);
+    row.appendChild(prior_td);
 
     table.appendChild(row);
     let dialog = document.getElementById('DialogTask'); 
@@ -153,10 +178,26 @@ function DeleteTask(el){
 }
 
 function saveTable(data){
-      //const data = { key: "ваши данные" }; // Ваши данные
-      localStorage.setItem("Table", JSON.stringify(data.innerHTML));
+  // выберем .btn внутри #slider
+var rows = document.querySelector('#task_table').querySelectorAll('tr:not(.del)');
+rows=[].slice.call(rows, 1);//Удаляем шапку
+
+
+const serializedData = JSON.stringify(Array.from(rows).map(row => {
+
+
+
+  return Array.from(row.children).map(cell => cell.innerText.replace('Удалить задачу',''));
+
+  }));
+  localStorage.setItem('Table', serializedData);
+      //const datas = { arr: rows }; // Ваши данные
+      //localStorage.setItem("Table", JSON.stringify(rows));
        // console.log(JSON.parse(localStorage.getItem("Table")));
 }
 function clearLocalTable(){
     localStorage.setItem("Table", JSON.stringify(""));
 }
+
+
+
