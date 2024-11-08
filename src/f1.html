@@ -108,10 +108,32 @@
             // Для восстановления данных в таблицу
             tableData.forEach(row => {
             const tr = document.createElement('tr');
+            let counter=0;
             row.forEach(cell => {
-            const td = document.createElement('td');
-            td.innerHTML = cell;
+              const td = document.createElement('td');
+              if (cell.includes("Удалить задачу")){
+                cell=cell.slice(0, -14);
+                td.innerText = cell;
+                td.innerHTML+=`<button class="del" onclick="DeleteTask(this)">Удалить задачу</button>`;
+                //cell = cell.replace('Удалить задачу-','');
+              }else if ((cell!='')&&( isNaN(Number(cell)))){
+                td.innerText = cell;
+                td.innerHTML+=`<button class="del" onclick="DeleteTask(this)">Удалить задачу</button>`;
+              }else{
+                if(counter==1){
+                  td.innerHTML=`<input type="checkbox" onclick="toInWork(this)" name="В работе" class="cb cbrab">`;
+                }else if(counter==2){
+                  td.innerHTML =`<input type="checkbox" onclick="toDone(this)" name="Выполнена" class="cbdone">`;
+                }else if((counter==3)&& (Number(cell)!=NaN)){
+                  td.innerHTML=row[3];
+                }
+                
+              }
+            
+            
+            
             tr.appendChild(td);
+            counter+=1;
             });
             table.appendChild(tr);
             });

@@ -179,12 +179,16 @@ function DeleteTask(el){
 
 function saveTable(data){
   // выберем .btn внутри #slider
-var rows = document.querySelector('#task_table').querySelectorAll('tr');
+var rows = document.querySelector('#task_table').querySelectorAll('tr:not(.del)');
 rows=[].slice.call(rows, 1);//Удаляем шапку
 
 
 const serializedData = JSON.stringify(Array.from(rows).map(row => {
-  return Array.from(row.children).map(cell => cell.innerHTML);
+
+
+
+  return Array.from(row.children).map(cell => cell.innerText.replace('Удалить задачу',''));
+
   }));
   localStorage.setItem('Table', serializedData);
       //const datas = { arr: rows }; // Ваши данные
