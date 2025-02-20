@@ -2,3 +2,5 @@
 /dist/
 /build/
 /src/.env
+/src/backend/.env
+.env
