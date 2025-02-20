@@ -4,6 +4,7 @@
   "description": "Starostin A.A. PRI-21",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "webpack serve",
     "build": "webpack"
   },
