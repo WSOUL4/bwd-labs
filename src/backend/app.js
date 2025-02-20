@@ -2,7 +2,7 @@
 //const express = require("express");
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 function apiDefault(app){
 
     app.get("/", function(request, response){
@@ -25,11 +25,25 @@ apiDefault(app);
 
 const port = process.env.PORT;
 //const port =8080;
-
 app.listen(port, (error) => {
     if (error) throw error;
-    console.info(`Ready on port ${port}`);
+    console.info(`Сервер запустился на порте ${port}`);
   });
+
+/*
+
+  
+  
+  app.listen(port)
+  .then(() => {
+    console.log('Сервер запустился');
+  })
+  .catch(err => {
+    console.error('Не удалось создать сервак', err);
+  });
+
+  
+  */
 
 }
 
