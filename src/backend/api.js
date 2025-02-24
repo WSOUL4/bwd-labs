@@ -1,13 +1,6 @@
 import {EstablishConnection,conn} from  './config/db.js'//'./src/backend/config/db.js'
+import {api_check_id,getParameterByName,api_check_user_creation} from './attr_check.js'
 
-function getParameterByName(name, url) {
-    name = name.replace(/[\[\]]/g, '\\$&');
-    let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-}
 
 
 
@@ -27,23 +20,66 @@ function apiConfiguration(app){
 
 
 function apiGETuserById(request, response) {
-    console.log(getParameterByName('id',request.url));
-    response.json('got it');
+    let id=api_check_id(request);
+    if (id){
     /*
     request.json().then((data) => {
         console.log(data);
     });
-
      */
+    conn.query(`SELECT name, email, "createdAt", id FROM public."user" WHERE id=${id}`,
+        function(err, results, fields) {
+        if (err){
+            console.log(err);
+            response.json(err,"Ошибка запроса");
+        }else{
+            response.json(results.rows);}
 
+    });
+
+    conn.end;} else {
+        response.json("Ошибка в значении паарметра");
+    }
 
 }
 function apiGETeventById(request, response) {
+    let id=api_check_id(request);
+    if (id){
+        conn.query(`SELECT title, description, date, "createdBy", id FROM public.event WHERE id=${id}`,
+            function(err, results, fields) {
+                if (err){
+                    console.log(err);
+                    response.json(err,"Ошибка запроса");
+                }else{
+                    response.json(results.rows);}
 
+            });
+
+        conn.end;
+    } else {
+        response.json("Ошибка в значении паарметра");
+    }
 }
 
 function apiPOSTuser(request, response) {
+let params= api_check_user_creation(request);
+//console.log(params);
+if (params){
+    conn.query(`INSERT INTO public."user"(name, email, "createdAt")\n`+
+        `VALUES ('${params.name}', '${params.email}', '${params.createdAt}');`,
+        function(err, results, fields) {
+            if (err){
+                console.log(err);
+                response.json(err,"Ошибка запроса");
+            }else{
+                response.json('Удачно добавлен!');}
 
+        });
+
+    conn.end;
+}else {
+    response.json("Ошибка в значении паарметра, или нехватает email");
+}
 }
 function apiPOSTevent(request, response) {
 
