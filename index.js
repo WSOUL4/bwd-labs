@@ -4,7 +4,14 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import {appServerLaunch} from './src/backend/app.js'
-import {EstablishConnection} from './src/backend/config/db.js'
+import {EstablishConnection,conn} from './src/backend/config/db.js'
+import {apiConfiguration} from './src/backend/api.js'
 
-appServerLaunch();
+
+
+let app=appServerLaunch();
+
 EstablishConnection();
+
+//let db_conn=EstablishConnection();
+apiConfiguration(app);

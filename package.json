@@ -127,6 +127,7 @@
     "html-entities": "^2.5.2",
     "html-minifier-terser": "^6.1.0",
     "htmlparser2": "^6.1.0",
+    "http": "^0.0.1-security",
     "http-deceiver": "^1.2.7",
     "http-errors": "^2.0.0",
     "http-parser-js": "^0.5.8",

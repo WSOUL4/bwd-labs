@@ -8,10 +8,11 @@ function apiDefault(app){
     app.get("/", function(request, response){
      
         // отправляем ответ
-        response.json({msg: 'Simple msg2'})
-        //response.send("<h2>Привет Express!</h2>");
+        //console.log(request);
+        response.send("<h2>Привет Express!</h2>");
     });
 }
+
 function appServerLaunch(){
 // создаем объект приложения
 const app = express();
@@ -26,14 +27,11 @@ apiDefault(app);
 const port = process.env.PORT;
 //const port =8080;
 app.listen(port, (error) => {
-    if (error) throw error;
+    if (error) console.error('Не удалось запустить сервер:', error);
     console.info(`Сервер запустился на порте ${port}`);
   });
 
 /*
-
-  
-  
   app.listen(port)
   .then(() => {
     console.log('Сервер запустился');
@@ -41,10 +39,8 @@ app.listen(port, (error) => {
   .catch(err => {
     console.error('Не удалось создать сервак', err);
   });
-
-  
   */
-
+return app;
 }
 
 export { appServerLaunch, apiDefault };//можно апи функцию не экспортировать она типо если из экспортируемой берётся, то взаимосвязанные хватает
