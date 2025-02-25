@@ -20,6 +20,7 @@ function api_check_id(request) {
     let id=getParameterByName('id',request.url);
     let id_num = undefined;
     id_num=Number(id);
+    //console.log(id);
     return id_num;
 }
 function api_check_user_creation(request){
