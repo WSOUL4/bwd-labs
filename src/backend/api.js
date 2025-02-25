@@ -31,14 +31,23 @@ function apiGETuserById(request, response) {
         function(err, results, fields) {
         if (err){
             console.log(err);
-            response.json(err,"Ошибка запроса");
+            //response.json(err,"Ошибка запроса");
+            response.status(500).send({
+                message: 'Ошибка запроса'
+            });
         }else{
-            response.json(results.rows);}
+
+            //response.json(results.rows);
+            response.status(200).json(results.rows);
+        }
 
     });
 
     conn.end;} else {
-        response.json("Ошибка в значении паарметра");
+        //response.json("Ошибка в значении парметра");
+        response.status(400).send({
+            message: 'Ошибка в значении парметра!'
+        });
     }
 
 }
@@ -52,24 +61,29 @@ function apiGETeventBy(request, response) {
             `WHERE date BETWEEN '${dates.startDate}' and '${dates.endDate}';`, function(err, results, fields) {
             if (err){
                 console.log(err);
-                response.json(err,"Ошибка запроса");
+                response.status(500).send({message: 'Ошибка запроса'});
             }else{
-                response.json(results.rows);}
+                //response.json(results.rows);
+                response.status(200).json(results.rows);
+            }
         });
     } else if (id){
         conn.query(`SELECT title, description, date, "createdBy", id FROM public.event WHERE id=${id}`,
             function(err, results, fields) {
                 if (err){
                     console.log(err);
-                    response.json(err,"Ошибка запроса");
+                    response.status(500).send({message: 'Ошибка запроса'});
                 }else{
-                    response.json(results.rows);}
+                    //response.json(results.rows);
+                    response.status(200).json(results.rows);
+                }
 
             });
 
 
     } else {
-        response.json("Ошибка в значении парметра");
+
+        response.status(400).send({message: 'Ошибка в параметрах запроса'});
     }
     conn.end;
 }
@@ -83,15 +97,19 @@ if (params){
         function(err, results, fields) {
             if (err){
                 console.log(err);
-                response.json(err,"Ошибка запроса");
+                response.status(500).send({message: 'Ошибка запроса'});
             }else{
-                response.json('Удачно добавлен!');}
+                //response.json('Удачно добавлен!');
+                response.status(200).send({message: 'Удачно добавлен!'});
+            }
 
         });
 
     conn.end;
 }else {
-    response.json("Ошибка в значении паарметра, или нехватает email");
+
+    response.status(400).send({message: 'Ошибка в значении паарметра, или нехватает email'});
+
 }
 
 }
@@ -104,12 +122,14 @@ function apiPOSTevent(request, response) {
             function(err, results, fields) {
                 if (err){
                     console.log(err);
-                    response.json(err,"Ошибка запроса");
+                    response.status(500).send({message: 'Ошибка запроса'});
                 }else{
-                    response.json('Удачно добавлен!');}
+                    response.status(200).send({message: 'Удачно добавлен!'});
+                }
     });
     } else {
-        response.json("Ошибка в значении паарметра");
+
+        response.status(400).send({message: 'Ошибка в параметрах запроса'});
     }
 }
 
@@ -122,12 +142,14 @@ function apiPUTevent(request, response) {
             function(err, results, fields) {
                 if (err){
                     console.log(err);
-                    response.json(err,"Ошибка запроса");
+                    response.status(500).send({message: 'Ошибка запроса'});
                 }else{
-                    response.json('Удачно изменён!');}
+                    response.status(200).send({message: 'Удачно изменён!'});
+                }
             });
     } else {
-        response.json("Ошибка в значении парметра");
+
+        response.status(400).send({message: 'Ошибка в параметрах запроса'});
     }
 }
 function apiDELETEevent(request, response) {
@@ -137,12 +159,13 @@ if (params){
         function(err, results, fields) {
             if (err){
                 console.log(err);
-                response.json(err,"Ошибка запроса");
+                response.status(500).send({message: 'Ошибка запроса'});
             }else{
-                response.json('Удачно уничтожен!');}
+                response.status(200).send({message: 'Удачно уничтожен!'});}
         });
 }else {
-    response.json("Ошибка в значении паарметра");
+
+    response.status(400).send({message: 'Ошибка в параметрах запроса'});
 }
 }
 
@@ -157,9 +180,10 @@ function apiGETusers(request, response) {
             //console.log(results);  // собственно данные
             if (err){
                 console.log(err);
-                response.json(err,"Ошибка запроса");
+                response.status(500).send({message: 'Ошибка запроса'});
             }else{
-            response.json(results.rows);}
+                response.status(200).json(results.rows);
+            }
            // console.log(fields);  // мета-данные полей
         });
 
@@ -175,9 +199,10 @@ function apiGETevents(request, response) {
         //console.log(results);  // собственно данные
         if (err){
             console.log(err);
-            response.json(err,"Ошибка запроса");
+            response.status(500).send({message: 'Ошибка запроса'});
         }else{
-            response.json(results.rows);}
+            response.status(200).json(results.rows);
+        }
         // console.log(fields);  // мета-данные полей
     });
 
