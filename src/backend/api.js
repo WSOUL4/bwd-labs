@@ -1,12 +1,24 @@
 import {EstablishConnection,conn} from  './config/db.js'//'./src/backend/config/db.js'
 import {api_check_id,getParameterByName,api_check_user_creation,api_cheack_event_creation,api_cheack_event_change,api_check_events_date_between} from './attr_check.js'
-
+import swaggerJsdoc  from 'swagger-jsdoc'
 
 
 
 function apiConfiguration(app){
 
+   // app.get("/api-docs",apiDOCS);
 
+    /**
+     * @swagger
+     * /users:
+     *   get:
+     *     summary: Получить пользователя с айди из параметра
+     *     responses:
+     *       200:
+     *         description: Успешный ответ с json ответом, может быть пустым
+     *       500:
+     *         description: Ошибка при выполнении запроса
+     */
     app.get("/users?",apiGETuserById);
     app.get("/events?",apiGETeventBy);
     app.get("/users", apiGETusers);
@@ -17,8 +29,12 @@ function apiConfiguration(app){
     app.delete("/events",apiDELETEevent);
 }
 
+/*
+function apiDOCS(request, response) {
 
+}
 
+ */
 function apiGETuserById(request, response) {
     let id=api_check_id(request);
     if (id){
