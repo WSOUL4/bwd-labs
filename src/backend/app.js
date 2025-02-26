@@ -2,16 +2,17 @@
 //const express = require("express");
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 function apiDefault(app){
 
     app.get("/", function(request, response){
      
         // отправляем ответ
-        response.json({msg: 'Simple msg2'})
-        //response.send("<h2>Привет Express!</h2>");
+        //console.log(request);
+        response.send("<h2>Привет Express!</h2>");
     });
 }
+
 function appServerLaunch(){
 // создаем объект приложения
 const app = express();
@@ -25,12 +26,21 @@ apiDefault(app);
 
 const port = process.env.PORT;
 //const port =8080;
-
 app.listen(port, (error) => {
-    if (error) throw error;
-    console.info(`Ready on port ${port}`);
+    if (error) console.error('Не удалось запустить сервер:', error);
+    console.info(`Сервер запустился на порте ${port}`);
   });
 
+/*
+  app.listen(port)
+  .then(() => {
+    console.log('Сервер запустился');
+  })
+  .catch(err => {
+    console.error('Не удалось создать сервак', err);
+  });
+  */
+return app;
 }
 
 export { appServerLaunch, apiDefault };//можно апи функцию не экспортировать она типо если из экспортируемой берётся, то взаимосвязанные хватает
