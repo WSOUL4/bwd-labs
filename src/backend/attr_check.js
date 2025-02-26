@@ -1,4 +1,5 @@
 
+import {ValidationError,NotFoundError} from './CustomErrors.js'
 import dotenv from 'dotenv'
 dotenv.config()//Для чтения из .env
 function getParameterByName(name, url) {
@@ -20,10 +21,17 @@ function isPostgreDate(date) {
 }
 function api_check_id(request) {
     let id=getParameterByName('id',request.url);
-    let id_num = undefined;
-    id_num=Number(id);
-    //console.log(id);
-    return id_num;
+    //let id_num = undefined;
+    let id_num=Number(id);
+    //console.log(id_num);
+    if(isNaN(id_num)){
+        //console.log("WORKNIGNNDN");
+        throw ValidationError;
+
+    }else{
+        return id_num;
+    }
+
 }
 function api_check_user_creation(request){
     //name, email, "createdAt"
@@ -35,9 +43,11 @@ function api_check_user_creation(request){
         if (isPostgreDate(createdAt)){
             return {'name': name,'email': email,'createdAt': createdAt};
     } else {
+            throw ValidationError;
         return undefined;
     }
 }else {
+        throw ValidationError;
         return undefined;
     }
 }
@@ -50,6 +60,7 @@ function api_cheack_event_creation(request) {
     if (title && Number(createdBy)){
         return {'title': title,'description': description,'date': date,'createdBy': createdBy};
     }else{
+        throw ValidationError;
         return undefined;
     }
 
@@ -66,8 +77,10 @@ function api_cheack_event_change(request) {
         if (title,description,isPostgreDate(date), Number(createdBy)){
         return {'id': id, 'title': title, 'description': description, 'date': date, 'createdBy': createdBy};
         }else{
+            throw ValidationError;
         return undefined;}
     }else{
+        throw ValidationError;
         return undefined;}
     }
     function api_check_events_date_between(request) {
@@ -76,6 +89,7 @@ function api_cheack_event_change(request) {
     if (startDate && endDate){
         return {'startDate': startDate, 'endDate': endDate};
     }else{
+        throw ValidationError;
         return undefined;}
 
     }
@@ -86,6 +100,7 @@ function api_cheack_event_change(request) {
             return true;
 
         } else {
+            throw ValidationError;
             return undefined;
         }
 

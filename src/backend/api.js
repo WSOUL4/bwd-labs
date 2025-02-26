@@ -1,4 +1,5 @@
 import {EstablishConnection,conn} from  './config/db.js'//'./src/backend/config/db.js'
+import {ValidationError,NotFoundError} from './CustomErrors.js'
 import {api_check_id,
     getParameterByName,
     api_check_user_creation,
@@ -8,6 +9,7 @@ import {api_check_id,
     api_key_vlidation} from './attr_check.js'
 import swaggerJsdoc  from 'swagger-jsdoc'
 import express from 'express'
+
 //let r=express.Router;
 /**
  * @swagger
@@ -212,82 +214,150 @@ function apiConfiguration(app){
     app.delete("/events",apiDELETEevent);
 }
 
-/*
-function apiDOCS(request, response) {
 
-}
-
- */
 function apiGETuserById(request, response) {
-    //let access_key=api_key_vlidation(request);
-    if(api_key_vlidation(request) === undefined){
-            response.status(400).send({message: 'Неправильный ключ'});
-            return;
+    try {
+        api_key_vlidation(request);
     }
-    let id=api_check_id(request);
-    if (id){
-    /*
-    request.json().then((data) => {
-        console.log(data);
-    });
-     */
+    catch (ValidationError)
+    {
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
+
+    let id= undefined;
+    try{
+        id=api_check_id(request);
+    }
+    catch (ValidationError) {
+        response.status(400).send({message: 'Неправильный атрибут'});
+        return;
+    }
+try{
     conn.query(`SELECT name, email, "createdAt", id FROM public."user" WHERE id=${id}`,
         function(err, results, fields) {
-        if (err){
-            console.log(err);
-            //response.json(err,"Ошибка запроса");
-            response.status(500).send({
-                message: 'Ошибка запроса'
-            });
-        }else{
+            if (err){
+                console.log(err);
+                //response.json(err,"Ошибка запроса");
+                response.status(500).send({
+                    message: 'Ошибка запроса'
+                });
+            }else{
 
-            //response.json(results.rows);
-            response.status(200).json(results.rows);
-        }
+                //response.json(results.rows);
+                if (results.rows.length!=0){
+                    response.status(200).json(results.rows);
+                }else{
+                    throw NotFoundError;
 
-    });
+                }
+            }
 
-    conn.end;} else {
-        //response.json("Ошибка в значении парметра");
-        response.status(400).send({
-            message: 'Ошибка в значении парметра!'
         });
-    }
+
+    conn.end;
+        
+}
+catch (ReferenceError) {
+    response.status(400).send({
+        message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+    });
+}
+    
 
 
 }
 function apiGETeventBy(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
+    /*
+    let id=undefined;
+    let dates=undefined;
+    try {
+        id=api_check_id(request);
+        dates=api_check_events_date_between(request);
+    }
+    catch (ValidationError)
+    {
+        response.status(400).send({message: 'Неправильные параметры'});
+        return;
+    }*/
     let id=api_check_id(request);
     let dates=api_check_events_date_between(request);
+
     if (dates){
-
-        conn.query(`SELECT title, description, date, "createdBy", id\n` +
-            `FROM public.event\n`+
-            `WHERE date BETWEEN '${dates.startDate}' and '${dates.endDate}';`, function(err, results, fields) {
-            if (err){
-                console.log(err);
-                response.status(500).send({message: 'Ошибка запроса'});
-            }else{
-                //response.json(results.rows);
+try{
+    conn.query(`SELECT title, description, date, "createdBy", id\n` +
+        `FROM public.event\n`+
+        `WHERE date BETWEEN '${dates.startDate}' and '${dates.endDate}';`, function(err, results, fields) {
+        if (err){
+            console.log(err);
+            response.status(500).send({message: 'Ошибка запроса'});
+        }else{
+            //response.json(results.rows);
+            if (results.rows.length!=0){
                 response.status(200).json(results.rows);
+            }else{
+                throw NotFoundError;
             }
-        });
-    } else if (id){
-        conn.query(`SELECT title, description, date, "createdBy", id FROM public.event WHERE id=${id}`,
-            function(err, results, fields) {
-                if (err){
-                    console.log(err);
-                    response.status(500).send({message: 'Ошибка запроса'});
-                }else{
-                    //response.json(results.rows);
-                    response.status(200).json(results.rows);
-                }
 
-            });
+        }
+    });
+
+}
+catch (err) {
+    if(err instanceof ReferenceError){
+        response.status(400).send({
+            message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+        });
+    } else  if (err instanceof NotFoundError){
+        response.status(404).send({
+            message: 'Записей не найдено'
+        });
+    }
+
+}
+
+
+
+    } else if (id){
+
+
+        try {
+            conn.query(`SELECT title, description, date, "createdBy", id FROM public.event WHERE id=${id}`,
+                function(err, results, fields) {
+                    if (err){
+                        console.log(err);
+                        response.status(500).send({message: 'Ошибка запроса'});
+                    }else{
+
+                        if (results.rows.length!=0){
+                            response.status(200).json(results.rows);
+                        }else{
+                            throw NotFoundError;
+                        }
+                    }
+
+                });
+        }
+        catch (err) {
+            if(err instanceof ReferenceError){
+                response.status(400).send({
+                    message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+                });
+            } else  if (err instanceof NotFoundError){
+                response.status(404).send({
+                    message: 'Записей не найдено'
+                });
+        }
+        }
+
 
 
     } else {
@@ -298,13 +368,28 @@ function apiGETeventBy(request, response) {
 }
 
 function apiPOSTuser(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-let params= api_check_user_creation(request);
+
+    let params;
+    try {
+        params= api_check_user_creation(request);
+    }
+catch (err) {
+        if (err instanceof ValidationError) {
+            response.status(400).send({message: 'Неправильные атрибуты'});
+            return;
+        }
+}
 //console.log(params);
-if (params){
+
+try {
     conn.query(`INSERT INTO public."user"(name, email, "createdAt")\n`+
         `VALUES ('${params.name}', '${params.email}', '${params.createdAt}');`,
         function(err, results, fields) {
@@ -317,22 +402,46 @@ if (params){
             }
 
         });
-
-    conn.end;
-}else {
-
-    response.status(400).send({message: 'Ошибка в значении паарметра, или нехватает email'});
-
 }
+catch (err) {
+    if(err instanceof ReferenceError){
+        response.status(400).send({
+            message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+        });
+    } else  if (err instanceof NotFoundError){
+        response.status(404).send({
+            message: 'Записей не найдено'
+        });
+    }
+}
+    conn.end;
+
 
 }
 function apiPOSTevent(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-    let params = api_cheack_event_creation(request);
-    if (params){
+
+
+
+    let params ;
+    try {
+        params= api_cheack_event_creation(request);
+    }
+    catch (err) {
+    if (err instanceof ValidationError){
+        response.status(400).send({message: 'Неправильные атрибуты'});
+        return;
+    }
+    }
+
+    try {
         conn.query(`insert into public.event( \n`+
             `title, description, date, "createdBy")\n`+
             ` VALUES ('${params.title}', '${params.description}', '${params.date}', '${params.createdBy}')`,
@@ -343,20 +452,46 @@ function apiPOSTevent(request, response) {
                 }else{
                     response.status(200).send({message: 'Удачно добавлен!'});
                 }
-    });
-    } else {
-
-        response.status(400).send({message: 'Ошибка в параметрах запроса'});
+            });
     }
+    catch (err) {
+        if(err instanceof ReferenceError){
+            response.status(400).send({
+                message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+            });
+        } else  if (err instanceof NotFoundError){
+            response.status(404).send({
+                message: 'Записей не найдено'
+            });
+        }
+    }
+
+    conn.end;
 }
 
 function apiPUTevent(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-    let params = api_cheack_event_change(request);
-    if (params){
+
+
+    let params ;
+
+    try {
+        params = api_cheack_event_change(request);
+    }
+    catch (err) {
+        if (err instanceof ValidationError){
+            response.status(400).send({message: 'Неправильные атрибуты'});
+            return;
+        }
+    }
+    try {
         conn.query(`UPDATE public.event
 \tSET title='${params.title}', description='${params.description}', date='${params.date}', "createdBy"='${params.createdBy}'
 \tWHERE id=${params.id};`,
@@ -368,75 +503,146 @@ function apiPUTevent(request, response) {
                     response.status(200).send({message: 'Удачно изменён!'});
                 }
             });
-    } else {
-
-        response.status(400).send({message: 'Ошибка в параметрах запроса'});
     }
+    catch (err) {
+        if(err instanceof ReferenceError){
+            response.status(400).send({
+                message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+            });
+        } else  if (err instanceof NotFoundError){
+            response.status(404).send({
+                message: 'Записей не найдено'
+            });
+        }
+    }
+    conn.end;
 }
 function apiDELETEevent(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-let params=api_check_id(request);
-if (params){
-    conn.query(`DELETE FROM public.event WHERE id=${params};`,
-        function(err, results, fields) {
-            if (err){
-                console.log(err);
-                response.status(500).send({message: 'Ошибка запроса'});
-            }else{
-                response.status(200).send({message: 'Удачно уничтожен!'});}
-        });
-}else {
 
-    response.status(400).send({message: 'Ошибка в параметрах запроса'});
-}
+
+
+
+    let params ;
+
+    try {
+        params = api_check_id(request);
+    }
+    catch (err) {
+        if (err instanceof ValidationError){
+            response.status(400).send({message: 'Неправильные атрибуты'});
+            return;
+        }
+    }
+
+    try {
+        conn.query(`DELETE FROM public.event WHERE id=${params};`,
+            function(err, results, fields) {
+                if (err){
+                    console.log(err);
+                    response.status(500).send({message: 'Ошибка запроса'});
+                }else{
+                    response.status(200).send({message: 'Удачно уничтожен!'});}
+            });
+    }
+    catch (err) {
+        if(err instanceof ReferenceError){
+            response.status(400).send({
+                message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+            });
+        } else  if (err instanceof NotFoundError){
+            response.status(404).send({
+                message: 'Записей не найдено'
+            });
+        }
+    }
+
+    conn.end;
 }
 
 function apiGETusers(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-   //let conn=EstablishConnection();
 
 
-        conn.query('SELECT name, email, "createdAt", id\n' +
-            '\tFROM public."user";', function(err, results, fields) {
+        try {
+            conn.query('SELECT name, email, "createdAt", id\n' +
+                '\tFROM public."user";', function(err, results, fields) {
 
-            //console.log(results);  // собственно данные
-            if (err){
-                console.log(err);
-                response.status(500).send({message: 'Ошибка запроса'});
-            }else{
-                response.status(200).json(results.rows);
+                //console.log(results);  // собственно данные
+                if (err){
+                    console.log(err);
+                    response.status(500).send({message: 'Ошибка запроса'});
+                }else{
+                    response.status(200).json(results.rows);
+                }
+                // console.log(fields);  // мета-данные полей
+            });
+        }
+        catch (err) {
+            if(err instanceof ReferenceError){
+                response.status(400).send({
+                    message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+                });
+            } else  if (err instanceof NotFoundError){
+                response.status(404).send({
+                    message: 'Записей не найдено'
+                });
             }
-           // console.log(fields);  // мета-данные полей
-        });
+        }
 
         conn.end;
 
 
 }
 function apiGETevents(request, response) {
-    if(api_key_vlidation(request) === undefined){
+    try {
+        api_key_vlidation(request);
+    }
+    catch (ValidationError)
+    {
         response.status(400).send({message: 'Неправильный ключ'});
         return;
     }
-    conn.query('SELECT title, description, date, "createdBy", id\n'+
-   'FROM public.event;', function(err, results, fields) {
 
-        //console.log(results);  // собственно данные
-        if (err){
-            console.log(err);
-            response.status(500).send({message: 'Ошибка запроса'});
-        }else{
-            response.status(200).json(results.rows);
-        }
-        // console.log(fields);  // мета-данные полей
-    });
+   try {
+       conn.query('SELECT title, description, date, "createdBy", id\n'+
+           'FROM public.event;', function(err, results, fields) {
 
+           //console.log(results);  // собственно данные
+           if (err){
+               console.log(err);
+               response.status(500).send({message: 'Ошибка запроса'});
+           }else{
+               response.status(200).json(results.rows);
+           }
+           // console.log(fields);  // мета-данные полей
+       });
+   }
+   catch (err) {
+       if(err instanceof ReferenceError){
+           response.status(400).send({
+               message: 'Ошибка в параметре такая, что БД не выполнила запрос'
+           });
+       } else  if (err instanceof NotFoundError){
+           response.status(404).send({
+               message: 'Записей не найдено'
+           });
+       }
+   }
     conn.end;
 }
 
