@@ -1,5 +1,11 @@
 import {EstablishConnection,conn} from  './config/db.js'//'./src/backend/config/db.js'
-import {api_check_id,getParameterByName,api_check_user_creation,api_cheack_event_creation,api_cheack_event_change,api_check_events_date_between} from './attr_check.js'
+import {api_check_id,
+    getParameterByName,
+    api_check_user_creation,
+    api_cheack_event_creation,
+    api_cheack_event_change,
+    api_check_events_date_between,
+    api_key_vlidation} from './attr_check.js'
 import swaggerJsdoc  from 'swagger-jsdoc'
 import express from 'express'
 //let r=express.Router;
@@ -213,6 +219,11 @@ function apiDOCS(request, response) {
 
  */
 function apiGETuserById(request, response) {
+    //let access_key=api_key_vlidation(request);
+    if(api_key_vlidation(request) === undefined){
+            response.status(400).send({message: 'Неправильный ключ'});
+            return;
+    }
     let id=api_check_id(request);
     if (id){
     /*
@@ -243,8 +254,13 @@ function apiGETuserById(request, response) {
         });
     }
 
+
 }
 function apiGETeventBy(request, response) {
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
     let id=api_check_id(request);
     let dates=api_check_events_date_between(request);
     if (dates){
@@ -282,6 +298,10 @@ function apiGETeventBy(request, response) {
 }
 
 function apiPOSTuser(request, response) {
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
 let params= api_check_user_creation(request);
 //console.log(params);
 if (params){
@@ -307,6 +327,10 @@ if (params){
 
 }
 function apiPOSTevent(request, response) {
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
     let params = api_cheack_event_creation(request);
     if (params){
         conn.query(`insert into public.event( \n`+
@@ -327,6 +351,10 @@ function apiPOSTevent(request, response) {
 }
 
 function apiPUTevent(request, response) {
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
     let params = api_cheack_event_change(request);
     if (params){
         conn.query(`UPDATE public.event
@@ -346,6 +374,10 @@ function apiPUTevent(request, response) {
     }
 }
 function apiDELETEevent(request, response) {
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
 let params=api_check_id(request);
 if (params){
     conn.query(`DELETE FROM public.event WHERE id=${params};`,
@@ -363,7 +395,10 @@ if (params){
 }
 
 function apiGETusers(request, response) {
-
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
    //let conn=EstablishConnection();
 
 
@@ -385,7 +420,10 @@ function apiGETusers(request, response) {
 
 }
 function apiGETevents(request, response) {
-
+    if(api_key_vlidation(request) === undefined){
+        response.status(400).send({message: 'Неправильный ключ'});
+        return;
+    }
     conn.query('SELECT title, description, date, "createdBy", id\n'+
    'FROM public.event;', function(err, results, fields) {
 

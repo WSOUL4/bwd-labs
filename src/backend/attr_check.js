@@ -1,4 +1,6 @@
 
+import dotenv from 'dotenv'
+dotenv.config()//Для чтения из .env
 function getParameterByName(name, url) {
     name = name.replace(/[\[\]]/g, '\\$&');
     let regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
@@ -77,4 +79,21 @@ function api_cheack_event_change(request) {
         return undefined;}
 
     }
-export{api_check_id,getParameterByName,api_check_user_creation,api_cheack_event_creation,api_cheack_event_change,api_check_events_date_between}
+    function api_key_vlidation(request){
+        let headers = request.headers;
+        const key = process.env.API_KEY;
+        if (key===headers.api_key){
+            return true;
+
+        } else {
+            return undefined;
+        }
+
+    }
+export{api_check_id,
+    getParameterByName,
+    api_check_user_creation,
+    api_cheack_event_creation,
+    api_cheack_event_change,
+    api_check_events_date_between,
+    api_key_vlidation}
